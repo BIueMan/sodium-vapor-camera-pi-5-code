@@ -24,7 +24,7 @@ encoderb = H264Encoder(1000000)
 camera_a.start_recording(encodera,"cam a record.h264")
 camera_b.start_recording(encoderb,"cam b record.h264")
 
-time.sleep(10)
+time.sleep(1000)
 
 camera_a.stop_recording()
 camera_b.stop_recording()
