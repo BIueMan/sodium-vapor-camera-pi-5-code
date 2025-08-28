@@ -31,3 +31,5 @@ camera_b.stop_recording()
 
 camera_a.stop_preview()
 camera_b.stop_preview()
+
+

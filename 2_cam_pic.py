@@ -1,6 +1,12 @@
 from picamera2 import Picamera2, Preview
 from time import sleep
 import datetime
+import os
+
+# --- Ensure output folder exists relative to script location ---
+script_dir = os.path.dirname(os.path.abspath(__file__))
+output_dir = os.path.join(script_dir, "Raw Images")
+os.makedirs(output_dir, exist_ok=True)
 
 picam0 = Picamera2(0)
 picam1 = Picamera2(1)
@@ -19,10 +25,10 @@ while True:
     if user_input.strip().lower() == "q":
         break
 
-    # Generate unique filenames (using counter or timestamp)
+    # Generate unique filenames (counter + timestamp)
     timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
-    file0 = f"cam0_capture_{counter}_{timestamp}.jpg"
-    file1 = f"cam1_capture_{counter}_{timestamp}.jpg"
+    file0 = os.path.join(output_dir, f"cam0_capture_{counter}_{timestamp}.jpg")
+    file1 = os.path.join(output_dir, f"cam1_capture_{counter}_{timestamp}.jpg")
 
     # Capture from both cameras
     picam0.capture_file(file0)
@@ -37,4 +43,3 @@ picam1.stop()
 picam0.stop_preview()
 picam1.stop_preview()
 print("Done.")
-

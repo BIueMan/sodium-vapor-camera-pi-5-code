@@ -2,6 +2,13 @@
 from picamera2 import Picamera2, Preview
 from picamera2.encoders import H264Encoder
 import time
+import datetime
+import os
+
+# --- Ensure output folder exists relative to script location ---
+script_dir = os.path.dirname(os.path.abspath(__file__))
+output_dir = os.path.join(script_dir, "Raw Videos")
+os.makedirs(output_dir, exist_ok=True)
 
 # Create Picamera2 instances for each camera
 
@@ -27,8 +34,13 @@ cam1.start()
 encodera = H264Encoder(1000000)
 encoderb = H264Encoder(1000000)
 
-cam0.start_recording(encodera,"/home/dan/Desktop/SV_camera_progect/cam0 record.h264")
-cam1.start_recording(encoderb,"/home/dan/Desktop/SV_camera_progect/cam1 record.h264")
+# Generate unique filenames (counter + timestamp)
+timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
+file0 = os.path.join(output_dir, f"cam0_capture_{timestamp}.mp4")
+file1 = os.path.join(output_dir, f"cam1_capture_{timestamp}.mp4")
+
+cam0.start_recording(encodera, file0)
+cam1.start_recording(encoderb, file1)
 
 time.sleep(10)  # Record for 10 seconds
 

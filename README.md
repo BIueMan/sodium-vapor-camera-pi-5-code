@@ -71,3 +71,35 @@ rpicam-hello -c 1   # Preview second camera
 ## 5. Dual camera Python test
 
 The included script `test_2_cam.py` will show a video stream from both cameras simultaneously.
+cam 0 (camera a) is situated behind the FBH590-10 Bandpass filter (images will be mostly red). 
+cam 1 (camera b) is situated behind the NF594-23 Notch filter (images will contain almost all rgb spectrum).
+
+---
+
+## 6. Picture Taking
+
+Pictures can be taken using the 2_cam_pic.py script. 
+
+IMPORTANT: As of now, due to hardware constraints, both cameras are rotated. Their pictures need to be 
+rotated manually before attempting to align them.
+ 
+- cam 0 needs to be rotated 270 degrees clockwise. 
+- cam 1 needs to be rotated 90 degrees clockwise. 
+ 
+---
+
+## 7. Video Taking
+
+Videos can be taken using the 2_cam_vid.py script. 
+Notice they are saved in a .h264 format!
+As with pictures, videos are rotated. 
+
+---
+## 8. Image & Video analysis
+
+Some basic analysis is done in ImageAnalysis.ipynb. 
+As of now, images don't get rotated, but videos do. 
+The analysis works on basic exampls (pics/videos with much light and no filters), but don't work 
+well with filters and low light. 
+
+
