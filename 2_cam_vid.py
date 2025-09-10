@@ -17,12 +17,18 @@ cam0 = Picamera2(0)  # First camera
 cam1 = Picamera2(1)  # Second camera
 
 # Configure both for video recording
-config0 = picam0.create_video_configuration(main={"size": (4056, 3040)})
+config0_highres = cam0.create_video_configuration(
+    main={"size": (2028, 1520)},
+    controls={"FrameRate": 50}  
+)
 
-config1 = picam1.create_video_configuration(main={"size": (4056, 3040)})
+config1_highres = cam1.create_video_configuration(
+    main={"size": (2028, 1520)},
+    controls={"FrameRate": 50}
 
-cam0.configure(config0)
-cam1.configure(config1)
+)
+cam0.configure(config0_highres)
+cam1.configure(config1_highres)
 
 cam0.start_preview(Preview.QTGL)
 cam1.start_preview(Preview.QTGL)
@@ -37,8 +43,8 @@ encoderb = H264Encoder(1000000)
 
 # Generate unique filenames (counter + timestamp)
 timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
-file0 = os.path.join(output_dir, f"cam0_capture_{timestamp}.mp4")
-file1 = os.path.join(output_dir, f"cam1_capture_{timestamp}.mp4")
+file0 = os.path.join(output_dir, f"cam0_capture_{timestamp}.h264")
+file1 = os.path.join(output_dir, f"cam1_capture_{timestamp}.h264")
 
 cam0.start_recording(encodera, file0)
 cam1.start_recording(encoderb, file1)

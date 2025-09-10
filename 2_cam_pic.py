@@ -2,7 +2,7 @@ from picamera2 import Picamera2, Preview
 from time import sleep
 import datetime
 import os
-
+from PIL import Image
 # --- Ensure output folder exists relative to script location ---
 script_dir = os.path.dirname(os.path.abspath(__file__))
 output_dir = os.path.join(script_dir, "Raw Images")
@@ -40,7 +40,10 @@ while True:
     picam0.capture_file(file0)
     picam1.capture_file(file1)
     print(f"Captured {file0} and {file1}")
-
+    img0 = Image.open(file0)
+    img1 = Image.open(file1)
+    img0.show
+    img1.show
     counter += 1
 
 # Cleanup
