@@ -11,6 +11,12 @@ os.makedirs(output_dir, exist_ok=True)
 picam0 = Picamera2(0)
 picam1 = Picamera2(1)
 
+config0 = picam0.create_still_configuration(main={"size": (4056, 3040)})
+picam0.configure(config0)
+config1 = picam1.create_still_configuration(main={"size": (4056, 3040)})
+picam1.configure(config1)
+
+
 # Start cameras once
 picam0.start_preview(Preview.QTGL)
 picam1.start_preview(Preview.QTGL)

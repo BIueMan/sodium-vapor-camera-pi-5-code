@@ -17,8 +17,9 @@ cam0 = Picamera2(0)  # First camera
 cam1 = Picamera2(1)  # Second camera
 
 # Configure both for video recording
-config0 = cam0.create_video_configuration()
-config1 = cam1.create_video_configuration()
+config0 = picam0.create_video_configuration(main={"size": (4056, 3040)})
+
+config1 = picam1.create_video_configuration(main={"size": (4056, 3040)})
 
 cam0.configure(config0)
 cam1.configure(config1)
